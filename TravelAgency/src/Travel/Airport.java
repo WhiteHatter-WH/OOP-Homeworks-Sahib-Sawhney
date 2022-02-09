@@ -16,7 +16,7 @@ public class Airport {
         if (aName == null) {
             throw new NullParameterException("Null value passed in for setAirportName");
         }
-        if (aName.length() < 3 || aName.length() > 3) {
+        if (aName.length() != 3 || !aName.equals(aName.toUpperCase())) {
             throw new BadParameterException("Bad value passed to setAirportName: " + aName);
         }
         airportName = aName;
@@ -24,13 +24,14 @@ public class Airport {
 
 
     public String getAirportName() {
+
         return airportName;
     }
 
     @Override
     public String toString() {
         return "Airport{" +
-                "airportName='" + airportName + '\'' +
+                "airportName='" + getAirportName() + '\'' +
                 '}';
     }
 
@@ -44,6 +45,7 @@ public class Airport {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(airportName);
     }
 }

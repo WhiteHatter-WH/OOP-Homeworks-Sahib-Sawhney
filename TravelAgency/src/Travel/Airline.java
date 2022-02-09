@@ -14,16 +14,16 @@ public class Airline {
 
     private void setAirlineName(String aName) throws NullParameterException, BadParameterException {
         if (aName == null) {
-            throw new NullParameterException("Null value passed in for setAirlineName");
+            throw new NullParameterException("Airline name cannot be null.");
         }
         if (aName.length() > 8) {
-            throw new BadParameterException("Bad value passed to setAirlineName: " + aName);
+            throw new BadParameterException("Invalid Name: " + aName);
         }
         airlineName = aName;
     }
 
-    public String getAirlineName()  {
-        return airlineName;
+    private String getAirlineName()  {
+            return airlineName;
     }
 
     @Override
