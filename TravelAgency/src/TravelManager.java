@@ -1,14 +1,29 @@
-import Travel.Airline;
-import Travel.Airport;
-import Travel.Flight;
+import Travel.*;
 import exception.BadParameterException;
 import exception.NullParameterException;
 
-public class TravelManager{
-    public static void main(String[] args) throws NullParameterException, BadParameterException {
+import java.util.Optional;
 
-        Airline airline = new Airline("Etihad");
-        Airport airport = new Airport("ORD");
-        Flight flight = new Flight("etihad", "ORD", "JFK", "", "");
+public class TravelManager {
+
+
+    public static void main(String[] args) throws Exception {
+        try {
+            Airline airline = new Airline("United");
+            Airport origin = new Airport("ORD");
+            Airport destination = new Airport("JFK");
+
+            //CommercialFlight commercialFlight = new CommercialFlight(airline, origin, destination);
+            String flightNumber = FlightManager.getInstance().createFlight("commercialFlight", airline, origin, destination);
+            String flightNumber2 = FlightManager.getInstance().createFlight("passengerFlight", airline, origin, destination);
+            Optional<Flight> flight = FlightManager.getInstance().getFlightByFlightNumber(flightNumber);
+
+            System.out.println(flight.get());
+        } catch (NullParameterException ex) {
+            ex.printStackTrace();
+        } catch (BadParameterException ex) {
+            ex.printStackTrace();
+        }
     }
+
 }

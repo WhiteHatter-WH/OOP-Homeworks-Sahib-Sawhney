@@ -1,2 +1,5 @@
-package Travel;public interface Airports {
+package Travel;
+
+public interface Airports {
+    String getName();
 }

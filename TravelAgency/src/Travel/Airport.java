@@ -5,33 +5,28 @@ import exception.NullParameterException;
 
 import java.util.Objects;
 
-public class Airport {
-    private String airportName;
+public final class Airport implements Airports {
 
-    public Airport(String airportName) throws BadParameterException, NullParameterException {
-        setAirportName(airportName);
+    private String name;
+
+    public Airport(String name) throws NullParameterException, BadParameterException {
+        setName(name);
     }
 
-    private void setAirportName(String aName) throws NullParameterException, BadParameterException {
-        if (aName == null) {
-            throw new NullParameterException("Null value passed in for setAirportName");
+    public final String getName() {
+        return name;
+    }
+
+    private void setName(String name) throws NullParameterException, BadParameterException {
+        if (name == null) {
+            throw new NullParameterException("Airport name cannot be null.");
         }
-        if (aName.length() < 3 || aName.length() > 3) {
-            throw new BadParameterException("Bad value passed to setAirportName: " + aName);
+
+        if (name.length() != 3 || !name.equals(name.toUpperCase())) {
+            throw new BadParameterException("Invalid name.");
         }
-        airportName = aName;
-    }
 
-
-    public String getAirportName() {
-        return airportName;
-    }
-
-    @Override
-    public String toString() {
-        return "Airport{" +
-                "airportName='" + airportName + '\'' +
-                '}';
+        this.name = name;
     }
 
     @Override
@@ -39,11 +34,18 @@ public class Airport {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Airport airport = (Airport) o;
-        return airportName.equals(airport.airportName);
+        return Objects.equals(name, airport.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(airportName);
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Airport{" +
+                "name='" + getName() + '\'' +
+                '}';
     }
 }

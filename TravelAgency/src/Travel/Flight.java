@@ -1,2 +1,6 @@
-package Travel;public interface flight {
+package Travel;
+
+public interface Flight {
+    String getFlightNumber();
+
 }

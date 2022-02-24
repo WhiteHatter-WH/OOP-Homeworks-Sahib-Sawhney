@@ -5,25 +5,28 @@ import exception.NullParameterException;
 
 import java.util.Objects;
 
-public class Airline {
-    private String airlineName;
+public final class Airline implements Airlines {
 
-    public Airline(String airlineName) throws BadParameterException, NullParameterException {
-        setAirlineName(airlineName);
+    private String name;
+
+    public Airline(String name) throws NullParameterException, BadParameterException {
+        setName(name);
     }
 
-    private void setAirlineName(String aName) throws NullParameterException, BadParameterException {
-        if (aName == null) {
-            throw new NullParameterException("Null value passed in for setAirlineName");
-        }
-        if (aName.length() > 8) {
-            throw new BadParameterException("Bad value passed to setAirlineName: " + aName);
-        }
-        airlineName = aName;
+    public String getName() {
+        return name;
     }
 
-    public String getAirlineName()  {
-        return airlineName;
+    private void setName(String name) throws NullParameterException, BadParameterException {
+        if (name == null) {
+            throw new NullParameterException("Airline name cannot be null.");
+        }
+
+        if (name.length() > 8) {
+            throw new BadParameterException("Invalid name.");
+        }
+
+        this.name = name;
     }
 
     @Override
@@ -31,18 +34,18 @@ public class Airline {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Airline airline = (Airline) o;
-        return airlineName.equals(airline.airlineName);
+        return Objects.equals(name, airline.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(airlineName);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return "Airline{" +
-                "airlineName='" + airlineName + '\'' +
+                "name='" + getName() + '\'' +
                 '}';
     }
 }
